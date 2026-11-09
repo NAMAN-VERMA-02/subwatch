@@ -137,6 +137,13 @@ def test_merchant_aliases():
             2000,
             "USD",
         ),
+        (  # SBI UPI: no "Rs" before the amount
+            "Dear UPI user A/C X1234 debited by 719.0 on date 05Nov26 trf to VODAFONE IDEA "
+            "Refno 631234567890. If not u? call 1800111109. -SBI",
+            "vi",
+            71900,
+            "INR",
+        ),
         (  # aggregator descriptor
             "Rs.130.00 spent on SBI Card XX1234 at GOOGLE PLAY on 05/11/26.",
             "google-play",
