@@ -34,8 +34,9 @@ def step(d: date, period: str, k: int = 1) -> date:
 
 
 def yearly(amount: int, period: str) -> int:
+    """Cost over a year, to the nearest rupee: it is an estimate, so paise would be noise."""
     num, den = PER_YEAR[period]
-    return amount * num // den
+    return (amount * num // den + 50) // 100 * 100
 
 
 def monthly(amount: int, period: str) -> int:

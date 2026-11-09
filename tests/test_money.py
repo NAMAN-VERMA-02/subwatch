@@ -54,7 +54,8 @@ def test_yearly_and_monthly_cost():
     assert yearly(11900, "month") == 142800  # Spotify ₹119 -> ₹1,428/year
     assert yearly(149900, "year") == 149900
     assert yearly(29900, "quarter") == 119600
-    assert yearly(34900, "28d") == 454946  # 13.04 recharges a year, floored to the paisa
+    assert yearly(34900, "28d") == 454900  # 13.04 recharges = ₹4,549.46, to the nearest rupee
+    assert yearly(71900, "84d") == 312400
     assert monthly(149900, "year") == 12492
     assert monthly(13000, "month") == 13000
 
