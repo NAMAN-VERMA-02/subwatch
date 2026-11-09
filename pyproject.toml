@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "subwatch"
+dynamic = ["version"]
+description = "Find the subscriptions and free trials draining your money, from Gmail and Indian bank SMS, on your own machine."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Naman Verma" }]
+keywords = ["subscriptions", "free-trial", "upi", "sms", "gmail", "india", "personal-finance"]
+classifiers = [
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Office/Business :: Financial",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+subwatch = "subwatch.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/NAMAN-VERMA-02/subwatch"
+Issues = "https://github.com/NAMAN-VERMA-02/subwatch/issues"
+
+[tool.setuptools.dynamic]
+version = { attr = "subwatch.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Personal exports must never be committed: keep them outside the repo.
+*.mbox
+data/
+/sms*.xml
+/sms*.csv
+dashboard.html
+*.ics

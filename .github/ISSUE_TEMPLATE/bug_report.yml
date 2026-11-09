@@ -1,0 +1,34 @@
+name: Bug report
+description: subwatch crashed, or showed a wrong amount, date or status.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please **remove personal details** before posting: account and card digits, UPI IDs,
+        names, phone numbers and email addresses. Replace them with `XXXX`.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you run, what did you expect, and what did you get?
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The command and its output (anonymised).
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: subwatch version
+      description: Output of `subwatch --version`.
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Windows, macOS, Linux]
