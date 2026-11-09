@@ -28,3 +28,5 @@ jobs:
       - run: ruff check .
       - run: ruff format --check .
       - run: pytest -q
+      # Synthetic data is a regression gate: any metric below eval/synthetic/baseline.json fails.
+      - run: python eval/run.py --synthetic --gate

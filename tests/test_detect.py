@@ -252,3 +252,26 @@ def test_topups_are_credits_not_subscriptions():
 def test_ignore_list():
     events = monthly("spotify", 11900, "2026-07-05", 5)
     assert detect(events, TODAY, Settings(ignore=["spotify"])).subs == []
+
+
+def test_equal_fares_among_many_rides_are_chance():
+    rides = [
+        ev(
+            (d("2025-06-01") + timedelta(days=3 * i)).isoformat(),
+            "charge",
+            "uber",
+            9000 + 731 * i % 30000,
+        )
+        for i in range(150)
+    ]
+    fluke = [ev(day, "charge", "uber", 34700) for day in ("2025-07-11", "2025-10-01", "2026-01-01")]
+    assert detect(rides + fluke, TODAY).subs == []
+
+
+def test_synthetic_generator_labels_every_case(tmp_path):
+    from subwatch.synthetic import MBOX_NAME, generate
+
+    labels = generate(tmp_path, TODAY, noise=10)
+    kinds = {r["kind"] for r in labels}
+    assert kinds == {"sub", "trial", "negative"}
+    assert (tmp_path / MBOX_NAME).exists() and list(tmp_path.glob("sms-*.xml"))

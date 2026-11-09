@@ -42,5 +42,8 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]
 
+[tool.ruff.lint.per-file-ignores]
+"src/subwatch/synthetic.py" = ["E501"]  # message templates read better unwrapped
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
