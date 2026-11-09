@@ -140,6 +140,7 @@ _NOISE = re.compile(
 def normalise(raw: str) -> str:
     """Stable key for a merchant the alias table doesn't know."""
     s = _AGG_PREFIX.sub("", raw.strip().lower())
+    s = re.sub(r"^n?ach\s*d?\s*-\s*", "", s)  # NACH debit prefix: "ACH D- HDFC BANK LTD"
     s = s.split("@")[0]  # UPI VPA: keep the handle
     s = re.sub(r"[._\-*/#&+]+", " ", s)
     s = _NOISE.sub(" ", s)

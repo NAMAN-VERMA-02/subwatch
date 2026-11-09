@@ -79,6 +79,7 @@ def test_merchant_aliases():
     assert known_merchant("paid to JioHotstar") == "jiohotstar"
     assert normalise("PAYU*ACME CLOUD PVT LTD") == "acme cloud"
     assert normalise("acme.payu@hdfcbank") == "acme"
+    assert normalise("ACH D- BSE LIMITED") == "bse"
 
 
 # ---------------------------------------------------------------- bank SMS
