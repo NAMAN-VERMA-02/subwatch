@@ -164,6 +164,12 @@ def _minor(num: str) -> int | None:
         return None
 
 
+# SBI's UPI alerts carry no currency marker: "A/C X1234 debited by 719.0 on date 05Nov26".
+_BARE_INR = re.compile(
+    r"\b(?:debited|credited) by\s+([0-9][0-9,]*(?:\.[0-9]{1,2})?)\b(?!\s*usd)", re.I
+)
+
+
 def find_amounts(text: str) -> list[tuple[int, int, str]]:
     """(position, minor units, currency) for every amount in text."""
     out = []
@@ -172,7 +178,10 @@ def find_amounts(text: str) -> list[tuple[int, int, str]]:
         value = _minor(num)
         if value is not None:
             out.append((m.start(), value, "INR" if m.group("inr") else "USD"))
-    return out
+    for m in _BARE_INR.finditer(text):
+        if (value := _minor(m.group(1))) is not None:
+            out.append((m.start(1), value, "INR"))
+    return sorted(out)
 
 
 _PREFER = re.compile(

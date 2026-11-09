@@ -1,23 +1,21 @@
 {
-  "precision": 0.95,
-  "recall": 0.95,
-  "found": 19,
+  "precision": 0.9524,
+  "recall": 1.0,
+  "found": 20,
   "labelled": 20,
-  "detected": 20,
+  "detected": 21,
   "false_alarms": [
     "naman v"
   ],
-  "missed": [
-    "vi"
-  ],
-  "cadence_right": 19,
+  "missed": [],
+  "cadence_right": 20,
   "by_category": {
     "service": {
       "found": 12,
       "labelled": 12
     },
     "bill": {
-      "found": 3,
+      "found": 4,
       "labelled": 4
     },
     "commitment": {
