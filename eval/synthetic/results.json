@@ -1,0 +1,38 @@
+{
+  "precision": 0.95,
+  "recall": 0.95,
+  "found": 19,
+  "labelled": 20,
+  "detected": 20,
+  "false_alarms": [
+    "naman v"
+  ],
+  "missed": [
+    "vi"
+  ],
+  "cadence_right": 19,
+  "by_category": {
+    "service": {
+      "found": 12,
+      "labelled": 12
+    },
+    "bill": {
+      "found": 3,
+      "labelled": 4
+    },
+    "commitment": {
+      "found": 4,
+      "labelled": 4
+    }
+  },
+  "trial_precision": 1.0,
+  "trial_recall": 1.0,
+  "trials_found": 2,
+  "trials_labelled": 2,
+  "trials_detected": 2,
+  "trial_false_alarms": [],
+  "trials_missed": [],
+  "messages": 2746,
+  "seed": 7,
+  "today": "2026-11-09"
+}

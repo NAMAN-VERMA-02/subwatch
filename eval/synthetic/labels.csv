@@ -1,0 +1,38 @@
+key,name,amount_rupees,period,category,active,kind,note
+spotify,Spotify,119,month,service,yes,sub,
+netflix,Netflix,649,month,service,yes,sub,
+youtube,YouTube Premium,129,month,service,yes,sub,
+google-one,Google One,130,month,service,yes,sub,
+amazon-prime,Amazon Prime,1499,year,service,yes,sub,
+jiohotstar,JioHotstar,299,quarter,service,yes,sub,
+claude,Claude Pro,1966,month,service,yes,sub,
+chatgpt,ChatGPT Plus,1999,month,service,yes,sub,
+airtel,Airtel postpaid,499,month,bill,yes,sub,
+jio,Jio prepaid,349,28d,bill,yes,sub,
+vi,Vi prepaid,719,84d,bill,yes,sub,
+act,ACT Fibernet,1050,month,bill,yes,sub,
+hdfc homeloan emi,Home loan EMI,23500,month,commitment,yes,sub,
+bse sip,Mutual fund SIP,5000,month,commitment,yes,sub,
+rameshkumar,Rent,15000,month,commitment,yes,sub,
+lic,LIC premium,4512,quarter,commitment,yes,sub,
+swiggy-one,Swiggy One,299,quarter,service,yes,sub,
+icloud,iCloud+,75,month,service,yes,sub,
+cultfit,cult.fit,1499,month,service,no,sub,
+linkedin,LinkedIn Premium,11000,year,service,yes,sub,
+duolingo,Super Duolingo,499,month,service,yes,sub,
+sonyliv,SonyLIV,399,month,service,yes,trial,
+zee5,ZEE5,99,month,service,yes,trial,
+canva,Canva Pro,499,month,service,no,trial,
+swiggy,swiggy,0,,,no,negative,food orders
+zomato,zomato,0,,,no,negative,food orders
+uber,uber,0,,,no,negative,rides
+amazon,amazon,0,,,no,negative,shopping next to Amazon Prime
+bookmyshow,bookmyshow,0,,,no,negative,movie tickets
+myntra,myntra,0,,,no,negative,monthly payment OTPs
+icici card bill,icici card bill,0,,,no,negative,credit card bill payments
+salary,salary,0,,,no,negative,salary credits
+naman v,naman v,0,,,no,negative,monthly self-transfer to own account
+upi lite,upi lite,0,,,no,negative,UPI Lite top-ups
+hdfc bank,hdfc bank,0,,,no,negative,credit card statement emails
+anthropic api credits,anthropic api credits,0,,,no,negative,one-off credit top-up
+apple tv,apple tv,0,,,no,negative,trial marketing

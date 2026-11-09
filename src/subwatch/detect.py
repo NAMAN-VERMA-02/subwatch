@@ -152,14 +152,18 @@ def _series(charges: list[Charge], category: str) -> list[list[Charge]]:
     by_amount: dict[int, list[Charge]] = defaultdict(list)
     for c in charges:
         by_amount[c.amount].append(c)
+    latest = max(c.date for c in charges)
     merged: list[list[Charge]] = []
     for s in sorted(by_amount.values(), key=lambda s: s[0].date):
         for m in merged:
+            # The new price must itself repeat, unless the hike is the merchant's latest charge;
+            # otherwise random order amounts chain into fake series.
             if (
                 len(m) >= 2
+                and (len(s) >= 2 or s[-1].date == latest)
                 and s[0].date > m[-1].date
                 and cadence([c.date for c in m]) is not None
-                and cadence([c.date for c in m] + [s[0].date]) is not None
+                and cadence([c.date for c in m] + [c.date for c in s]) is not None
                 and 0.65 <= s[0].amount / m[-1].amount <= 1.5
             ):
                 m.extend(s)
@@ -237,6 +241,9 @@ def detect(events: list[Event], today: date, s: Settings | None = None) -> Repor
             stated = next((c.period for c in series if c.period), None)
             signal = known or bool(mandates) or any(c.signal for c in series)
             n = len(series)
+            in_span = sum(1 for c in cs if dates[0] <= c.date <= dates[-1])
+            if not known and n * 3 < in_span:
+                continue  # a few equal fares among 100 rides is chance, not a subscription
             if n >= 3 and period:
                 pass
             elif n == 2 and period and (signal or category == "bill"):
