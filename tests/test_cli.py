@@ -124,3 +124,12 @@ def test_rupee_sign_survives_a_cp1252_pipe(tmp_path):
     )
     assert run.returncode == 0, run.stderr
     assert "₹119".encode() in run.stdout
+    # `> nul` on Windows: NUL reports isatty() True but still encodes as cp1252
+    to_null = subprocess.run(
+        [sys.executable, "-m", "subwatch", "mark", "notion", "--price", "119"],
+        env=env,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        timeout=120,
+    )
+    assert to_null.returncode == 0, to_null.stderr

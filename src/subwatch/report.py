@@ -57,6 +57,9 @@ def sections(report: Report) -> dict[str, list[Sub]]:
 
 def _next(s: Sub, today: date) -> str:
     if s.status == "trial":
+        if s.next_renewal < today:  # still in grace: the first charge may yet arrive
+            day = short_date(s.next_renewal, today)
+            return f"ended {day}" if s.kind == "trial" else f"was due {day}"
         return ("ends " if s.kind == "trial" else "first debit ") + when(s.next_renewal, today)
     if s.status in ("ended", "stopped"):
         if s.status == "ended":
