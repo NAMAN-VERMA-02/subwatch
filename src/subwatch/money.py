@@ -81,7 +81,9 @@ def when(d: date, today: date) -> str:
 
 
 def duration(days: int) -> str:
-    return f"{days // 30} months" if days >= 60 else f"{days} days"
+    if days < 1:
+        return "since today"
+    return f"{days // 30} months" if days >= 60 else f"{days} day{'s' if days > 1 else ''}"
 
 
 def totals(subs, credits_30: int = 0, credits_365: int = 0) -> dict[str, int]:
