@@ -382,7 +382,8 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     for stream in (sys.stdout, sys.stderr):
         # Piped or redirected output on Windows defaults to cp1252, which has no ₹ sign.
-        if not stream.isatty() and (stream.encoding or "").lower() not in ("utf-8", "utf8"):
+        # No isatty() check: Windows NUL (`> nul`, `>/dev/null`) claims to be a tty.
+        if (stream.encoding or "").lower() not in ("utf-8", "utf8"):
             stream.reconfigure(encoding="utf-8")
     if not getattr(args, "fn", None):
         ap.print_help()
