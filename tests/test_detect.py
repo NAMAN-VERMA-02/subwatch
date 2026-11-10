@@ -39,6 +39,9 @@ def test_cadence():
     assert cadence(days) == "84d"
     assert cadence([d("2025-06-20"), d("2026-06-20")]) == "year"
     assert cadence([d("2026-08-01"), d("2026-08-04"), d("2026-08-30")]) is None
+    # renewal slips (18th -> 30th -> 5th), from a real YouTube Premium history
+    slipped = ["02-18", "03-18", "04-18", "05-18", "06-18", "07-18", "08-30", "09-30", "11-05"]
+    assert cadence([d(f"2026-{md}") for md in slipped]) == "month"
 
 
 def test_monthly_sub_deduped_across_sms_and_email():

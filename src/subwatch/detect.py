@@ -129,11 +129,12 @@ def _dedupe(charges: list[Charge], topups: list[Charge]) -> list[Charge]:
 
 
 def cadence(dates: list[date]) -> str | None:
-    """Period from the gaps between charges; one missed month (a 2x gap) is tolerated."""
+    """Period from the gaps between charges. Tolerates a missed cycle (2x gap) and a renewal
+    date that slips (a failed payment retried later), as long as most gaps are single."""
     gaps = [(b - a).days for a, b in zip(dates, dates[1:], strict=False)]
     for family, lo, hi in _FAMILIES:
         single = [g for g in gaps if lo <= g <= hi]
-        if single and all(lo <= g <= hi or 2 * lo <= g <= 2 * hi for g in gaps):
+        if single and 2 * len(single) >= len(gaps) and all(lo <= g <= 2 * hi for g in gaps):
             mean = sum(single) / len(single)
             if family == "month":
                 return "28d" if mean < 29 else "month"

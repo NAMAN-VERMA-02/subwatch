@@ -133,7 +133,7 @@ _AGG_PREFIX = re.compile(
 _NOISE = re.compile(
     r"\b(?:pvt|private|ltd|limited|llp|inc|india|technologies|technology|services|solutions|"
     r"payments?|online|digital|www|com|in|co|upi|vpa|ref|no|payu|razorpay|rzp|billdesk|"
-    r"cashfree|ccavenue)\b|[0-9]{3,}"
+    r"cashfree|ccavenue|thru|through)\b|[0-9]{3,}"
 )
 
 
@@ -379,7 +379,8 @@ def sms_merchant(text: str) -> str | None:
             if _NOT_MERCHANT.search(raw):
                 continue
             if name := normalise(raw):
-                return name
+                # UPI AutoPay "to Google" is Play billing for some app (YouTube, Claude...)
+                return "google-play" if name == "google" else name
     return None
 
 
