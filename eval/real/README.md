@@ -1,6 +1,6 @@
 # Real data (Naman's own, anonymised)
 
-Pending: no run yet. When it happens, the steps are:
+First run: 2026-11-10 (see the main README for results). The steps were:
 
 1. Write the ground truth **before** any detector run, from sources subwatch never reads:
    UPI AutoPay/mandate lists, card standing instructions, Play Store subscriptions, memory.
