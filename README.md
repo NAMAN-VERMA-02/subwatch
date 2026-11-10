@@ -25,9 +25,9 @@ GPay, PhonePe and Paytm each show only the mandates made through them. subwatch 
 Python 3.10+, no dependencies:
 
 ```bash
-uv tool install git+https://github.com/NAMAN-VERMA-02/subwatch@v0.1.0
+uv tool install git+https://github.com/NAMAN-VERMA-02/subwatch@v0.1.1
 ```
-(or `pipx install git+https://github.com/NAMAN-VERMA-02/subwatch@v0.1.0`)
+(or `pipx install git+https://github.com/NAMAN-VERMA-02/subwatch@v0.1.1`)
 
 ## Try it in 30 seconds
 ```bash
