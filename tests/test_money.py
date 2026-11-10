@@ -75,6 +75,7 @@ def test_when_and_duration():
     assert when(date(2027, 1, 3), today) == "on 3 Jan 2027"
     assert duration(45) == "45 days"
     assert duration(61) == "2 months"
+    assert (duration(0), duration(1)) == ("since today", "1 day")
 
 
 def sub(amount, period, category="service", status="active", wasted=0, saved=0):
