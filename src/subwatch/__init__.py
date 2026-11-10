@@ -1,3 +1,3 @@
 """subwatch: find the subscriptions and free trials draining your money."""
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
