@@ -1,0 +1,40 @@
+{
+  "precision": 0.5,
+  "recall": 1.0,
+  "found": 1,
+  "labelled": 1,
+  "detected": 2,
+  "false_alarms": [
+    "merchant_bc47312f"
+  ],
+  "missed": [],
+  "cadence_right": 1,
+  "by_category": {
+    "service": {
+      "found": 1,
+      "labelled": 1
+    },
+    "bill": {
+      "found": 0,
+      "labelled": 0
+    },
+    "commitment": {
+      "found": 0,
+      "labelled": 0
+    }
+  },
+  "trial_precision": 0.0,
+  "trial_recall": 1.0,
+  "trials_found": 0,
+  "trials_labelled": 0,
+  "trials_detected": 3,
+  "trial_false_alarms": [
+    "linkedin",
+    "merchant_192ce3ce",
+    "merchant_b247750e"
+  ],
+  "trials_missed": [],
+  "messages": 8775,
+  "scan_seconds": 16.5,
+  "today": "2026-11-10"
+}

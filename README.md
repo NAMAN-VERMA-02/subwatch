@@ -99,16 +99,26 @@ Options: `--today`, `--unused-days N` (default 30), `--usd-rate` (default 95), `
 | Data | Subscriptions found | False alarms | Precision | Recall | Trials |
 |---|---|---|---|---|---|
 | **Synthetic** (seed 7, 2,746 messages, run 2026-11-09) | 20 of 20 | 1 | 95% | 100% | 2 of 2, 0 false |
-| **Naman's own Gmail + SMS** (anonymised) | pending | | | | |
+| **Naman's own Gmail + SMS**, first run (8,775 messages, 2026-11-10) | 0 of 1 | 1 | 0% | 0% | 0 of 0, 3 flagged |
+| **Naman's own Gmail + SMS**, after tuning (same data and truth) | 1 of 1 | 1 | 50% | 100% | 0 of 0, 3 flagged |
 
 - **Synthetic** data is made up and was written by the same person as the detector. CI uses it as a regression gate only, so read it as "nothing broke", not as real-world accuracy. Its one false alarm is a monthly transfer to the user's own account, which `subwatch mark … ignore` hides.
 - **Real data:** the ground truth is frozen *before* the detector runs. It comes from the UPI AutoPay lists, card standing instructions and Play Store subscriptions, so anything subwatch misses still counts against it. Only anonymised counts are committed (`eval/real/`).
+- **Real data, read this before the percentages:** n = 1. The frozen truth lists one active subscription (YouTube Premium, ₹89/month).
+  - **The first run missed it.** Its renewal date slipped twice (the 18th, then the 30th, then the 5th), and the cadence check rejected the 43-day gap. The bank SMS also called it "Google" with nothing to tie it to the YouTube receipts.
+  - **After tuning:**
+    - Slipped renewals are accepted when most gaps are a single cycle.
+    - UPI AutoPay "to Google" is treated as Play billing.
+    - #9 (a PNB pre-debit bug found on this data) is fixed.
+  - **The four "false alarms" are real.** They were checked by hand after the run: a Claude ₹1,999 plan, Google One and LinkedIn Premium trials, and the Play AutoPay behind Claude. All four had already been discontinued, so they are absent from a truth list of *active* subscriptions. subwatch shows Claude as active because its next due date (11 Nov) hasn't passed yet; `mark claude cancel` fixes that.
+  - This data was redacted before the run (names, phone, account and reference numbers, OTPs and personal emails were removed; personal chats were dropped).
+  - Files: `eval/real/truth.anon.csv` (committed before the run), `results.json` (first run), `results.after-tuning.json`.
 - Reproduce: `python eval/run.py --synthetic`.
 - Scan speed: 148 messages/s on 20,320 synthetic emails (8 MB). That was measured on the author's Windows laptop while it was busy with other jobs, so treat it as a floor. A large Takeout is a one-time import; later scans only add new messages. Measure yours with `python eval/run.py --bench 20000`.
 
 ## Limitations
 - Usage evidence depends on what services choose to email or SMS. Many never send login emails, which is why "unknown" exists.
-- The real-data numbers, once in, come from one person's phone and inbox; anonymised message formats from others are welcome (see Contributing).
+- The real-data numbers come from one person's phone and inbox with a single active subscription, so they show behaviour on real message formats, not a statistically meaningful rate; anonymised message formats from others are welcome (see Contributing).
 - Not covered:
   - RCS bank messages (SMS backups don't include them)
   - iPhone SMS (export to CSV with a tool like iMazing; untested)
