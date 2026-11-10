@@ -366,7 +366,7 @@ _SMS_MERCHANT = [
     re.compile(r"\bupi/(?:p2[am]/)?\d*/?(?P<m>[^/\s][^/]{1,40}?)(?=/|\s|$)", re.I),
     re.compile(rf"\b(?:at|towards|info[:\-]?)\s+(?P<m>[A-Za-z0-9][^\n]{{1,40}}?){_STOP}", re.I),
     re.compile(rf"\bto\s+(?:vpa\s+)?(?P<m>[A-Za-z0-9][^\n]{{1,40}}?){_STOP}", re.I),
-    re.compile(r"\bon\s+(?P<m>[A-Za-z][^\n]{1,40}?)(?=\.\s|\.$|\s+avl|\s*$)", re.I),
+    re.compile(r"\bon\s+(?P<m>[A-Za-z][^\n]{1,40}?)(?=[,;]|\.\s|\.$|\s+avl|\s*$)", re.I),
 ]
 
 

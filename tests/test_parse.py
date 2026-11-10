@@ -187,6 +187,17 @@ def test_mandate_and_predebit():
         64900,
         date(2026, 12, 8),
     )
+    # PNB: a long UMN right after the merchant used to hide it (#9)
+    pnb = sms(
+        "A/c XX1234 will be debited for Rs.499.00 on 24-02-26 for UPI Autopay on Kuku TV,"
+        "UMN:a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6@axl.Maintain balance-PNB"
+    )
+    assert (pnb.kind, pnb.merchant, pnb.amount, pnb.due) == (
+        "predebit",
+        "kuku tv",
+        49900,
+        date(2026, 2, 24),
+    )
 
 
 def test_commitment_hints():
